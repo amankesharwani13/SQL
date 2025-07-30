@@ -1,0 +1,159 @@
+# 📘 SQL Practice Questions with Answers
+
+*Generated on: 2025-07-30*
+
+### 1. Select all students who scored more than 85 marks.
+```sql
+SELECT * FROM students WHERE marks > 85;
+```
+
+### 2. Display names of students from the city “Mirzapur”.
+```sql
+SELECT name FROM students WHERE city = 'Mirzapur';
+```
+
+### 3. Find the roll numbers of students who have grades other than 'A'.
+```sql
+SELECT rollno FROM students WHERE grade != 'A';
+```
+
+### 4. List all unique cities from the students table.
+```sql
+SELECT DISTINCT city FROM students;
+```
+
+### 5. Display the names and marks of top 3 students.
+```sql
+SELECT name, marks FROM students ORDER BY marks DESC LIMIT 3;
+```
+
+### 6. Find the average marks of all students.
+```sql
+SELECT AVG(marks) FROM students;
+```
+
+### 7. Count the number of students in each city.
+```sql
+SELECT city, COUNT(*) FROM students GROUP BY city;
+```
+
+### 8. Find the maximum marks from the students table.
+```sql
+SELECT MAX(marks) FROM students;
+```
+
+### 9. Show total number of students having grade 'O'.
+```sql
+SELECT COUNT(*) FROM students WHERE grade = 'O';
+```
+
+### 10. Display the city-wise highest marks scored.
+```sql
+SELECT city, MAX(marks) FROM students GROUP BY city;
+```
+
+### 11. Use WHERE to list students whose marks are between 80 and 90.
+```sql
+SELECT * FROM students WHERE marks BETWEEN 80 AND 90;
+```
+
+### 12. Use HAVING to find cities where the average marks are greater than 80.
+```sql
+SELECT city, AVG(marks) FROM students GROUP BY city HAVING AVG(marks) > 80;
+```
+
+### 13. Write an INNER JOIN query to list students and their enrolled course.
+```sql
+SELECT s.id, s.name, c.course FROM student_table s INNER JOIN course c ON s.id = c.id;
+```
+
+### 14. Write a LEFT JOIN to list all students and their course (even if no course).
+```sql
+SELECT s.id, s.name, c.course FROM student_table s LEFT JOIN course c ON s.id = c.id;
+```
+
+### 15. Show all courses and the students enrolled using RIGHT JOIN.
+```sql
+SELECT s.id, s.name, c.course FROM student_table s RIGHT JOIN course c ON s.id = c.id;
+```
+
+### 16. Find students who don’t have a course using LEFT EXCLUSIVE JOIN.
+```sql
+SELECT s.id, s.name FROM student_table s LEFT JOIN course c ON s.id = c.id WHERE c.id IS NULL;
+```
+
+### 17. Find the students who scored more than the average marks.
+```sql
+SELECT name, marks FROM student_ WHERE marks > (SELECT AVG(marks) FROM student_);
+```
+
+### 18. Display names of students whose roll number is even using subquery.
+```sql
+SELECT name FROM student_ WHERE rollno IN (SELECT rollno FROM student_ WHERE rollno % 2 = 0);
+```
+
+### 19. Write a query to get city names where at least 2 students live (with subquery).
+```sql
+SELECT city FROM students GROUP BY city HAVING COUNT(*) >= 2;
+```
+
+### 20. Select student(s) who have the second highest marks.
+```sql
+SELECT name FROM student_ WHERE marks = (SELECT MAX(marks) FROM student_ WHERE marks < (SELECT MAX(marks) FROM student_));
+```
+
+### 21. Create a view to show rollno, name, and marks of students.
+```sql
+CREATE VIEW view1 AS SELECT rollno, name, marks FROM student_;
+```
+
+### 22. Update marks of all students by adding 2 bonus marks.
+```sql
+UPDATE students SET marks = marks + 2;
+```
+
+### 23. Change the grade of a student whose rollno is 105 to 'A'.
+```sql
+UPDATE students SET grade = 'A' WHERE rollno = 105;
+```
+
+### 24. Delete all students with marks less than 50.
+```sql
+DELETE FROM students WHERE marks < 50;
+```
+
+### 25. Truncate the students table and verify it becomes empty.
+```sql
+TRUNCATE TABLE students;
+```
+
+### 26. Write a query to show teacher name and their department name.
+```sql
+SELECT t.name, d.name AS department FROM teacher t JOIN dept d ON t.dept_id = d.id;
+```
+
+### 27. Change the dept id of department “MATHS” and see how it updates teacher table.
+```sql
+UPDATE dept SET id = 110 WHERE name = 'MATHS';
+```
+
+### 28. Delete a department and see how related teachers are deleted.
+```sql
+DELETE FROM dept WHERE id = 110;
+```
+
+### 29. Show full list of students and courses using FULL OUTER JOIN logic (LEFT + RIGHT + UNION).
+```sql
+SELECT * FROM student_table s LEFT JOIN course c ON s.id = c.id UNION SELECT * FROM student_table s RIGHT JOIN course c ON s.id = c.id;
+```
+
+### 30. Create a view of students with marks above 90 and use that view in a SELECT query.
+```sql
+CREATE VIEW top_students AS SELECT * FROM students WHERE marks > 90; SELECT * FROM top_students;
+```
+
+### 31. Create a query that displays student name, marks, and a new column that says Pass if marks > 40 and Fail otherwise.
+```sql
+SELECT name, marks, CASE WHEN marks > 40 THEN 'Pass' ELSE 'Fail' END AS result FROM students;
+```
+
